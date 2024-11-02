@@ -794,7 +794,6 @@ important_dependencies=(
 conflicting_packages=(
   rofi
   hyprland
-  ml4w-hyprland
 )
 
 echo "Installing dependencies"
