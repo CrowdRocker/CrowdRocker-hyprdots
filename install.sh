@@ -68,31 +68,6 @@ Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
   echo "Chaotic AUR repository added/updated successfully"
 fi
 
-# Add cachyos AUR keys and repository if not added, else skip
-echo "Adding chaotic AUR keys and repository"
-if ! pacman-key --list-keys chaotic-aur &> /dev/null; then
-  echo "Adding cachyos AUR keys and repository"
- # Import the repository key
-sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
-# Sign the repository key
-sudo pacman-key --lsign-key F3B607488DB35A47
-sudo pacman -U 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-20240331-1-any.pkg.tar.zst' \
-'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' \
-'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v3-mirrorlist-18-1-any.pkg.tar.zst' \
-'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v4-mirrorlist-6-1-any.pkg.tar.zst' \
-'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-7.0.0.r3.gf3211df-3.1-x86_64.pkg.tar.zst'
-  echo "cachyos AUR keys added successfully"
-else 
-  echo "cachyos AUR keys and repository already added. Skipping..."
-fi
-
-# Add cachyos AUR
-if ! grep -q "^\[cachyos\]" /etc/pacman.conf; then
-  echo "[cachyos]
-Include = /etc/pacman.d/cachyos-mirrorlist" | sudo tee -a /etc/pacman.conf
-  sudo pacman -Sy
-  echo "cachyos AUR repository added/updated successfully"
-fi
 
 # Install dependencies using the install function
 # Make an array of all the dependencies (swaylock-effects rofi-lbonn-wayland waybar-git neofetch cava foot hyprland-git mpd mpc sweet-cursor-theme-git ttf-font-awesome nerd-fonts hyprpicker pipewire wireplumber fish)
